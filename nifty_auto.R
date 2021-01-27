@@ -12,7 +12,7 @@ autoplot(com_ts)
 com_ts<-cbind(nifty_auto,gpr_ind)
 
 theme_set(theme_bw())
-nifty_it %>% decompose()%>%autoplot()
+nifty_auto %>% decompose()%>%autoplot()
 gpr_ind %>% decompose()%>%autoplot()
 autoplot(com_ts[,c("nifty_auto","gpr_ind")]) +
   ylab("") + xlab("Year")
@@ -23,10 +23,9 @@ com_ts %>%
   xlab("gpr_index") +
   geom_point() +
   geom_smooth(method="lm", se=FALSE)
-
-mod<-tslm(nifty_it ~ gpr_ind, data=com_ts)
+mod<-tslm(nifty_auto ~ gpr_ind, data=com_ts)
 summary(mod)
-
+checkresiduals(mod)
 
 
 
